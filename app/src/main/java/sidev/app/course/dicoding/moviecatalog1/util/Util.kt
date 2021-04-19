@@ -15,6 +15,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
+import org.json.JSONArray
+import org.json.JSONObject
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.lib.android.std.tool.util._NetworkUtil
 import sidev.lib.structure.data.value.varOf
@@ -68,4 +70,9 @@ object Util {
 
     fun getSharedPref(ctx: Context, mode: Int = Context.MODE_PRIVATE): SharedPreferences =
         ctx.getSharedPreferences(Const.SHARED_PREF_NAME, mode)
+
+    fun JSONArray.forEach(f: (JSONObject) -> Unit) {
+        for(i in 0 until length()) f(getJSONObject(i))
+    }
+    fun JSONObject.getIntOrNull(key: String): Int? = if(has(key)) getInt(key) else null
 }

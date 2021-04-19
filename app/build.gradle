@@ -3,6 +3,11 @@ plugins {
     id 'kotlin-android'
 }
 
+def props = new Properties()
+file("../setting.properties").withInputStream { props.load(it) }
+
+def apiKey= props.apiKey
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -21,6 +26,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField('String', 'API_KEY', "\"$apiKey\"")
+        }
+        debug {
+            buildConfigField('String', 'API_KEY', "\"$apiKey\"")
         }
     }
     compileOptions {
