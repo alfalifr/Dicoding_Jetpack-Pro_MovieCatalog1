@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Dicoding - Jetpack Pro - Movie Catalog 1</string>
+    <string name="tv_shows">TV Shows</string>
+    <string name="movies">Movies</string>
+    <string name="toast_check_connection">Please check internet your connection</string>
+    <string name="title">Title</string>
+    <string name="release_date">Release Date</string>
+    <string name="progress_template">100%</string>
+</resources>
