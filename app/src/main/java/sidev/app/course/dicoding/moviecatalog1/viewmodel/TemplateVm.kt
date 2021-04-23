@@ -3,14 +3,17 @@ package sidev.app.course.dicoding.moviecatalog1.viewmodel
 import android.content.Context
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.Job
 import org.jetbrains.anko.runOnUiThread
 
 /**
  * Template for all ViewModel in this project.
  */
-open class TemplateVm(c: Context?): ViewModel() {
+open class TemplateVm(c: Context): ViewModel() {
     protected var ctx: Context? = c
         private set
+
+    protected var job: Job?= null
 
     /**
      * This method will be called when this ViewModel is no longer used and will be destroyed.
@@ -24,10 +27,13 @@ open class TemplateVm(c: Context?): ViewModel() {
         ctx = null //So there won't be a memory leak.
     }
 
+    protected fun cancelJob(){
+        job?.cancel()
+    }
     /**
      * Executed before any async task in `this` runs.
      */
-    protected var onPreAsyncTask: (() -> Unit)?= null
+    private var onPreAsyncTask: (() -> Unit)?= null
     fun onPreAsyncTask(f: (() -> Unit)?){
         onPreAsyncTask= f
     }

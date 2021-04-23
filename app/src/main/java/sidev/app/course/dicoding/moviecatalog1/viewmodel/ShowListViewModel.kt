@@ -1,0 +1,65 @@
+package sidev.app.course.dicoding.moviecatalog1.viewmodel
+
+import android.content.Context
+import androidx.lifecycle.*
+import org.json.JSONObject
+import sidev.app.course.dicoding.moviecatalog1.model.Show
+import sidev.app.course.dicoding.moviecatalog1.util.Const
+import sidev.app.course.dicoding.moviecatalog1.util.Util
+import sidev.lib.`val`.SuppressLiteral
+
+class ShowListViewModel private constructor(
+    c: Context,
+    private val type: Const.ShowType,
+): TemplateVm(c) {
+
+    companion object {
+        fun getInstance(
+            owner: ViewModelStoreOwner,
+            c: Context,
+            type: Const.ShowType,
+        ): ShowListViewModel = ViewModelProvider(
+            owner,
+            object: ViewModelProvider.Factory {
+                @Suppress(SuppressLiteral.UNCHECKED_CAST)
+                override fun <T : ViewModel?> create(modelClass: Class<T>): T = ShowListViewModel(c, type) as T
+            }
+        ).get(ShowListViewModel::class.java)
+    }
+
+    val showList: LiveData<out List<Show>>
+        get()= _showList
+    private val _showList: MutableLiveData<MutableList<Show>> = MutableLiveData()
+
+
+    fun downloadShowPopularList(page: Int = 1, forceDownload: Boolean = false){
+        if(!forceDownload && _showList.value == null) return
+        cancelJob()
+        doOnPreAsyncTask()
+        job = Util.httpGet(
+            ctx!!,
+            type.getPopularUrl(page = page), //Const.getTvPopularUrl(page = page),
+        ){ _, content ->
+            content.parseShowListTo(_showList)
+        }
+    }
+
+    private fun String.parseShowListTo(liveData: MutableLiveData<out List<Show>>){
+        val json = JSONObject(this)
+        val jsonArray = json.getJSONArray(Const.KEY_RESULTS)
+        val movies = ArrayList<Show>(jsonArray.length())
+        for(i in 0 until jsonArray.length()){
+            val movieJson = jsonArray.getJSONObject(i)
+            movies += Show(
+                movieJson.getString(Const.KEY_ID),
+                (if(movieJson.has(Const.KEY_TITLE)) movieJson.getString(Const.KEY_TITLE)
+                else movieJson.getString(Const.KEY_NAME)),
+                movieJson.getString(Const.KEY_IMG),
+                (if(movieJson.has(Const.KEY_RELEASE)) movieJson.getString(Const.KEY_RELEASE)
+                else movieJson.getString(Const.KEY_FIRST_AIR_DATE)),
+                movieJson.getDouble(Const.KEY_RATING),
+            )
+        }
+        liveData.value = movies
+    }
+}

@@ -1,9 +1,20 @@
 <resources>
-    <string name="app_name">Dicoding - Jetpack Pro - Movie Catalog 1</string>
+    <string name="app_name">MovieCatalog1</string>
     <string name="tv_shows">TV Shows</string>
     <string name="movies">Movies</string>
     <string name="toast_check_connection">Please check internet your connection</string>
     <string name="title">Title</string>
     <string name="release_date">Release Date</string>
     <string name="progress_template">100%</string>
+    <string name="percent">%.2f %%</string>
+    <string name="no_data">No Data</string>
+    <string name="template_title">This is the Title</string>
+    <string name="template_date">10/04/2021</string>
+    <string name="template_genres">action, horror, comedy</string>
+    <string name="template_duration">1h 3m</string>
+    <string name="user_score">User \n Score</string>
+    <string name="template_tagline">This is Tagline</string>
+    <string name="overview">Overview</string>
+    <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="duration">%dh %dm</string>
 </resources>

@@ -1,18 +1,19 @@
 package sidev.app.course.dicoding.moviecatalog1.util
 
 import sidev.app.course.dicoding.moviecatalog1.BuildConfig
+import java.io.Serializable
 import java.util.*
 
 object Const {
-    enum class ShowType {
+    enum class ShowType: Serializable {
+        TV {
+            override fun getDetailUrl(id: String, lang: String): String = getTvDetailUrl(id, lang)
+            override fun getPopularUrl(lang: String, page: Int): String = getTvPopularUrl(lang, page)
+        },
         MOVIE {
             override fun getDetailUrl(id: String, lang: String): String = getMovieDetailUrl(id, lang)
             override fun getPopularUrl(lang: String, page: Int): String = getMoviePopularUrl(lang, page)
         },
-        TV {
-            override fun getDetailUrl(id: String, lang: String): String = getTvDetailUrl(id, lang)
-            override fun getPopularUrl(lang: String, page: Int): String = getTvPopularUrl(lang, page)
-        }
         ;
 
         abstract fun getDetailUrl(id: String, lang: String = "en-US"): String
@@ -50,10 +51,13 @@ object Const {
         "$ENDPOINT_TV/popular?api_key=$API_KEY&language=$lang&page=$page"
 
 
+    const val KEY_TYPE = "type"
+    const val KEY_SHOW = "show"
     const val KEY_RESULTS = "results"
     const val KEY_ID = "id"
     const val KEY_TITLE = "title"
     const val KEY_RELEASE = "release_date"
+    const val KEY_FIRST_AIR_DATE = "first_air_date"
     const val KEY_IMG = "poster_path"
     const val KEY_RATING = "vote_average"
     const val KEY_GENRES = "genres"
