@@ -2,10 +2,13 @@ package sidev.app.course.dicoding.moviecatalog1.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.*
+import com.google.gson.JsonParser
 import org.json.JSONObject
 import sidev.app.course.dicoding.moviecatalog1.model.Show
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.Util
+import sidev.app.course.dicoding.moviecatalog1.util.Util.getDouble
+import sidev.app.course.dicoding.moviecatalog1.util.Util.getString
 import sidev.lib.`val`.SuppressLiteral
 
 class ShowListViewModel private constructor(
@@ -45,11 +48,11 @@ class ShowListViewModel private constructor(
     }
 
     private fun String.parseShowListTo(liveData: MutableLiveData<out List<Show>>){
-        val json = JSONObject(this)
-        val jsonArray = json.getJSONArray(Const.KEY_RESULTS)
-        val movies = ArrayList<Show>(jsonArray.length())
-        for(i in 0 until jsonArray.length()){
-            val movieJson = jsonArray.getJSONObject(i)
+        val json = JsonParser.parseString(this).asJsonObject
+        val jsonArray = json.getAsJsonArray(Const.KEY_RESULTS)
+        val movies = ArrayList<Show>(jsonArray.size())
+        for(i in 0 until jsonArray.size()){
+            val movieJson = jsonArray[i].asJsonObject
             movies += Show(
                 movieJson.getString(Const.KEY_ID),
                 (if(movieJson.has(Const.KEY_TITLE)) movieJson.getString(Const.KEY_TITLE)

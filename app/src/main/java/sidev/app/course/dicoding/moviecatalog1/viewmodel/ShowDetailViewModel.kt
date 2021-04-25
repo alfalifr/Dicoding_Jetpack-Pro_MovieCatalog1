@@ -2,6 +2,7 @@ package sidev.app.course.dicoding.moviecatalog1.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.*
+import com.google.gson.JsonParser
 import org.json.JSONObject
 import sidev.app.course.dicoding.moviecatalog1.model.Show
 import sidev.app.course.dicoding.moviecatalog1.model.ShowDetail
@@ -9,6 +10,7 @@ import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.Util
 import sidev.app.course.dicoding.moviecatalog1.util.Util.forEach
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getIntOrNull
+import sidev.app.course.dicoding.moviecatalog1.util.Util.getString
 import sidev.lib.`val`.SuppressLiteral
 
 class ShowDetailViewModel private constructor(
@@ -42,12 +44,12 @@ class ShowDetailViewModel private constructor(
         job = Util.httpGet(
             ctx!!,
             type.getDetailUrl(id),
-        ) { code, content ->
-            val json = JSONObject(content)
-            val genreArray = json.getJSONArray(Const.KEY_GENRES)
-            val genres = ArrayList<String>(genreArray.length())
+        ) { _, content ->
+            val json = JsonParser.parseString(content).asJsonObject
+            val genreArray = json.getAsJsonArray(Const.KEY_GENRES)
+            val genres = ArrayList<String>(genreArray.size())
             genreArray.forEach {
-                genres += it.getString(Const.KEY_NAME)
+                genres += it.asJsonObject.getString(Const.KEY_NAME)
             }
             _showDetail.value = ShowDetail(
                 show, genres,

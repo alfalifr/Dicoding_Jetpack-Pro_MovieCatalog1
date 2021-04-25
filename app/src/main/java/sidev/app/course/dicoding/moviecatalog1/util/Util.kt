@@ -12,6 +12,8 @@ import com.android.volley.toolbox.HttpHeaderParser
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -114,4 +116,13 @@ object Util {
             }
         })
     }
+
+    fun JsonObject.getString(key: String): String = getAsJsonPrimitive(key).asString
+    fun JsonObject.getInt(key: String): Int = getAsJsonPrimitive(key).asInt
+    fun JsonObject.getIntOrNull(key: String): Int? = if(has(key)) getAsJsonPrimitive(key).asInt else null
+    fun JsonObject.getDouble(key: String): Double = getAsJsonPrimitive(key).asDouble
+
+    fun JsonArray.getString(i: Int): String = this[i].asString
+    fun JsonArray.getInt(i: Int): Int = this[i].asInt
+    fun JsonArray.getDouble(i: Int): Double = this[i].asDouble
 }
