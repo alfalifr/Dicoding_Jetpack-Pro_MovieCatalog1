@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.databinding.PageRvBinding
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailActivity
@@ -13,6 +14,8 @@ import sidev.app.course.dicoding.moviecatalog1.ui.adapter.ShowAdp
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowListViewModel
 import sidev.lib.android.std.tool.util.`fun`.startAct
+import java.lang.Exception
+
 
 class ShowListFragment: Fragment() {
     private lateinit var binding: PageRvBinding
@@ -57,6 +60,9 @@ class ShowListFragment: Fragment() {
                 showNoData(false)
                 showLoading()
             }
+            onCallNotSuccess { code, e ->
+                showDataError(true, code, e)
+            }
             showList.observe(this@ShowListFragment) {
                 adp.dataList = it
                 showLoading(false)
@@ -66,7 +72,19 @@ class ShowListFragment: Fragment() {
         }
     }
 
-    private fun showNoData(show: Boolean = true) = binding.apply {
+    private fun showNoData(show: Boolean = true) {
+        showDataAnomaly(show)
+        binding.tvNoData.text = getString(R.string.no_data)
+    }
+
+    @Suppress("SameParameterValue")
+    private fun showDataError(show: Boolean = true, code: Int = -1, e: Exception? = null) {
+        showDataAnomaly(show)
+        val eClass = if(e != null) e::class.java.simpleName else "null"
+        binding.tvNoData.text = getString(R.string.error_data, "$eClass ($code)", e?.message ?: "null")
+    }
+
+    private fun showDataAnomaly(show: Boolean = true) = binding.apply {
         if(show){
             tvNoData.visibility = View.VISIBLE
             rv.visibility = View.GONE

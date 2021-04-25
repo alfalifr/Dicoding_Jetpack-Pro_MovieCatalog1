@@ -11,6 +11,7 @@ import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getDurationString
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowDetailViewModel
+import java.lang.Exception
 
 class DetailActivity: AppCompatActivity() {
     private lateinit var binding: DetailPageBinding
@@ -42,7 +43,11 @@ class DetailActivity: AppCompatActivity() {
 
         vm = ShowDetailViewModel.getInstance(this, application, showRepo, showType).apply {
             onPreAsyncTask {
+                showError(false)
                 showLoading()
+            }
+            onCallNotSuccess { code, e ->
+                showError(true, code, e)
             }
             showDetail.observe(this@DetailActivity){
                 if(it != null){
@@ -59,6 +64,7 @@ class DetailActivity: AppCompatActivity() {
                             .into(ivBg)
                     }
                 }
+                showError(false)
                 showLoading(false)
             }
             downloadShowDetail(show.id)
@@ -67,5 +73,19 @@ class DetailActivity: AppCompatActivity() {
 
     private fun showLoading(show: Boolean = true)= binding.apply {
         pb.visibility = if(show) View.VISIBLE else View.GONE
+    }
+
+    private fun showError(show: Boolean = true, code: Int = -1, e: Exception? = null) = binding.apply {
+        if(show){
+            tvOverview.visibility= View.GONE
+            tvOverviewContent.visibility= View.GONE
+            tvError.visibility= View.VISIBLE
+            val eClass = if(e != null) e::class.java.simpleName else "null"
+            binding.tvError.text = getString(R.string.error_data, "$eClass ($code)", e?.message ?: "null")
+        } else {
+            tvOverview.visibility= View.VISIBLE
+            tvOverviewContent.visibility= View.VISIBLE
+            tvError.visibility= View.GONE
+        }
     }
 }

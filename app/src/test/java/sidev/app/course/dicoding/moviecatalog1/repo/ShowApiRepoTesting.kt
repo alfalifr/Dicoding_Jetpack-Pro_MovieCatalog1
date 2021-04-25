@@ -67,7 +67,7 @@ class ShowApiRepoTesting {
             assert(overview.contains(aotOverviewPart))
         }
     }
-    
+
 
     private fun List<Show>.verify(){
         assertNotNull(this)
