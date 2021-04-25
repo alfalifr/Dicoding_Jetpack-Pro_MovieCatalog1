@@ -7,17 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import sidev.app.course.dicoding.moviecatalog1.databinding.PageRvBinding
+import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailActivity
 import sidev.app.course.dicoding.moviecatalog1.ui.adapter.ShowAdp
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowListViewModel
 import sidev.lib.android.std.tool.util.`fun`.startAct
 
-class ShowListFrag: Fragment() {
+class ShowListFragment: Fragment() {
     private lateinit var binding: PageRvBinding
     private lateinit var adp: ShowAdp
     private lateinit var vm: ShowListViewModel
     private lateinit var type: Const.ShowType
+    var showRepo = ShowApiRepo
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,12 +52,12 @@ class ShowListFrag: Fragment() {
             }
         }
 
-        vm = ShowListViewModel.getInstance(this, requireActivity().application, type).apply {
+        vm = ShowListViewModel.getInstance(this, requireActivity().application, showRepo, type).apply {
             onPreAsyncTask {
                 showNoData(false)
                 showLoading()
             }
-            showList.observe(this@ShowListFrag) {
+            showList.observe(this@ShowListFragment) {
                 adp.dataList = it
                 showLoading(false)
                 showNoData(it == null || it.isEmpty())

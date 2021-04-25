@@ -7,6 +7,7 @@ import org.junit.Rule
 import org.junit.Test
 import sidev.app.course.dicoding.moviecatalog1.TestingUtil
 import sidev.app.course.dicoding.moviecatalog1.TestingUtil.waitForValue
+import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.lib.console.prin
 import sidev.lib.console.prine
@@ -20,7 +21,7 @@ class ShowDetailViewModelTest {
 
     @Before
     fun setup(){
-        vm = ShowDetailViewModel(null, TestingUtil.dummyShowItem, Const.ShowType.MOVIE)
+        vm = ShowDetailViewModel(null, ShowApiRepo, Const.ShowType.MOVIE)
     }
 
     @Test
@@ -28,7 +29,7 @@ class ShowDetailViewModelTest {
         vm.onCallNotSuccess { code, e ->
             prine("onCallNotSuccess code= $code e= $e")
         }
-        vm.downloadShowDetail()
+        vm.downloadShowDetail(TestingUtil.dummyShowItem.id)
 
         val data = vm.showDetail.waitForValue()
         assertNotNull(data)

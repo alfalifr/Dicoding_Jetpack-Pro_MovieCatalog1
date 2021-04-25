@@ -10,6 +10,7 @@ import org.junit.Test
 import org.mockito.Matchers
 import org.mockito.Mockito
 import sidev.app.course.dicoding.moviecatalog1.model.Show
+import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getDouble
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getString
@@ -110,7 +111,7 @@ class CobUnitTest {
     @Test
     fun vmTesting() = runBlocking {
         //val vm = ShowListViewModel(null, Const.ShowType.MOVIE)
-        val mock = ShowListViewModel(null, Const.ShowType.MOVIE) //Mockito.spy(vm)
+        val mock = ShowListViewModel(null, ShowApiRepo, Const.ShowType.MOVIE) //Mockito.spy(vm)
         mock.onCallNotSuccess { code, e ->
             prine("onCallNotSuccess code= $code e= $e")
         }

@@ -3,17 +3,21 @@ package sidev.app.course.dicoding.moviecatalog1.viewmodel
 import android.app.Application
 import androidx.lifecycle.*
 import com.google.gson.JsonParser
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import sidev.app.course.dicoding.moviecatalog1.model.Show
 import sidev.app.course.dicoding.moviecatalog1.model.ShowDetail
+import sidev.app.course.dicoding.moviecatalog1.repository.Failure
+import sidev.app.course.dicoding.moviecatalog1.repository.ShowRepo
+import sidev.app.course.dicoding.moviecatalog1.repository.Success
 import sidev.app.course.dicoding.moviecatalog1.util.Const
-import sidev.app.course.dicoding.moviecatalog1.util.Util
-import sidev.app.course.dicoding.moviecatalog1.util.Util.getIntOrNull
-import sidev.app.course.dicoding.moviecatalog1.util.Util.getString
 import sidev.lib.`val`.SuppressLiteral
 
 class ShowDetailViewModel(
     c: Application?,
-    private val show: Show,
+    private val repo: ShowRepo,
+    //private val show: Show,
     private val type: Const.ShowType,
 ): AsyncVm(c) {
 
@@ -21,13 +25,14 @@ class ShowDetailViewModel(
         fun getInstance(
             owner: ViewModelStoreOwner,
             c: Application?,
-            show: Show,
+            repo: ShowRepo,
+            //show: Show,
             type: Const.ShowType,
         ): ShowDetailViewModel = ViewModelProvider(
             owner,
             object: ViewModelProvider.Factory {
                 @Suppress(SuppressLiteral.UNCHECKED_CAST)
-                override fun <T : ViewModel?> create(modelClass: Class<T>): T = ShowDetailViewModel(c, show, type) as T
+                override fun <T : ViewModel?> create(modelClass: Class<T>): T = ShowDetailViewModel(c, repo, type) as T
             }
         ).get(ShowDetailViewModel::class.java)
     }
@@ -36,30 +41,19 @@ class ShowDetailViewModel(
     val showDetail: LiveData<ShowDetail>
         get()= _showDetail
 
-    fun downloadShowDetail(forceDownload: Boolean = false){
+    fun downloadShowDetail(id: String, forceDownload: Boolean = false){
         if(!forceDownload && _showDetail.value != null) return
         cancelJob()
         doOnPreAsyncTask()
-        job = Util.httpGet(
-            ctx,
-            type.getDetailUrl(show.id),
-            ::doCallNotSuccess
-        ) { _, content ->
-            val json = JsonParser.parseString(content).asJsonObject
-            val genreArray = json.getAsJsonArray(Const.KEY_GENRES)
-            val genres = ArrayList<String>(genreArray.size())
-            genreArray.forEach {
-                genres += it.asJsonObject.getString(Const.KEY_NAME)
+        job = GlobalScope.launch(Dispatchers.IO) {
+            val result = when(type){
+                Const.ShowType.MOVIE -> repo.getMovieDetail(ctx, id)
+                Const.ShowType.TV -> repo.getTvDetail(ctx, id)
             }
-            _showDetail.postValue(
-                ShowDetail(
-                    show, genres,
-                    json.getIntOrNull(Const.KEY_MOVIE_DURATION),
-                    json.getString(Const.KEY_TAGLINE),
-                    json.getString(Const.KEY_OVERVIEW),
-                    json.getString(Const.KEY_BACKDROP),
-                )
-            )
+            when(result){
+                is Success -> _showDetail.postValue(result.data)
+                is Failure -> doCallNotSuccess(result.code, result.e)
+            }
         }
     }
 }

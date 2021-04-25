@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.databinding.DetailPageBinding
 import sidev.app.course.dicoding.moviecatalog1.model.Show
+import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getDurationString
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowDetailViewModel
@@ -16,6 +17,7 @@ class DetailActivity: AppCompatActivity() {
     private lateinit var show: Show
     private lateinit var showType: Const.ShowType
     private lateinit var vm: ShowDetailViewModel
+    var showRepo = ShowApiRepo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,7 @@ class DetailActivity: AppCompatActivity() {
                 .into(ivPoster)
         }
 
-        vm = ShowDetailViewModel.getInstance(this, application, show, showType).apply {
+        vm = ShowDetailViewModel.getInstance(this, application, showRepo, showType).apply {
             onPreAsyncTask {
                 showLoading()
             }
@@ -59,7 +61,7 @@ class DetailActivity: AppCompatActivity() {
                 }
                 showLoading(false)
             }
-            downloadShowDetail()
+            downloadShowDetail(show.id)
         }
     }
 

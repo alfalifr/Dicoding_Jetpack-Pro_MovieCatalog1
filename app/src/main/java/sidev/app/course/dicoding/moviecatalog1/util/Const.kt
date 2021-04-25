@@ -40,7 +40,7 @@ object Const {
 
     fun getMovieDetailUrl(id: String, lang: String = "en-US"): String =
         "$ENDPOINT_MOVIE/$id?api_key=$API_KEY&language=$lang"
-
+    //https://api.themoviedb.org/3/movie/458576?api_key=2c0f358fb74aa907fcc1f8adca770ac3&language=en-US
     fun getMoviePopularUrl(lang: String = "en-US", page: Int = 1): String =
         "$ENDPOINT_MOVIE/popular?api_key=$API_KEY&language=$lang&page=$page"
 
@@ -66,4 +66,6 @@ object Const {
     const val KEY_OVERVIEW = "overview"
     const val KEY_BACKDROP = "backdrop_path"
     const val KEY_MOVIE_DURATION = "runtime"
+
+    const val DEFAULT_TIMEOUT = 5000L //in millisecs
 }

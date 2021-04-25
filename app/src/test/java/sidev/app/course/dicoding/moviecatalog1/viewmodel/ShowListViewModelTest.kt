@@ -7,6 +7,7 @@ import org.junit.Test
 
 import org.junit.Rule
 import sidev.app.course.dicoding.moviecatalog1.TestingUtil.waitForValue
+import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.lib.console.prin
 import sidev.lib.console.prine
@@ -20,7 +21,7 @@ class ShowListViewModelTest {
 
     @Before
     fun setup(){
-        vm = ShowListViewModel(null, Const.ShowType.values().random())
+        vm = ShowListViewModel(null, ShowApiRepo, Const.ShowType.values().random())
     }
 
     @Test
