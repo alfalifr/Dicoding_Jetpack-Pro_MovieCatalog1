@@ -18,6 +18,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
 import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
 import org.json.JSONArray
@@ -27,24 +30,40 @@ import sidev.app.course.dicoding.moviecatalog1.model.ShowDetail
 import sidev.lib.android.std.tool.util._NetworkUtil
 import sidev.lib.console.prine
 import sidev.lib.structure.data.value.varOf
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Util {
     fun httpGet(
-        c: Context,
+        c: Context?, // Nullable so it is easier to unit-test this.
         url: String,
-        onError: ((code: Int, e: VolleyError) -> Unit)?= null,
+        onError: ((code: Int, e: Exception) -> Unit)?= null,
         onResponse: (code: Int, content: String) -> Unit,
     ) : Job = GlobalScope.launch(Dispatchers.IO) {
-        if(_NetworkUtil.isNetworkActive(c)){
-            Volley.newRequestQueue(c).add(
-                createVolleyRequest(
-                    Request.Method.GET, url, onError, onResponse
-                ))
+        if(c != null){
+            if(_NetworkUtil.isNetworkActive(c)){
+                Volley.newRequestQueue(c).add(
+                    createVolleyRequest(
+                        Request.Method.GET, url, onError, onResponse
+                    ))
+            } else {
+                c.runOnUiThread {
+                    toast(c.getString(R.string.toast_check_connection))
+                }
+            }
         } else {
-            c.runOnUiThread {
-                toast(c.getString(R.string.toast_check_connection))
+            val client = OkHttpClient()
+            val call = okhttp3.Request.Builder()
+                .url(url)
+                .get()
+                .build()
+            try {
+                val response = client.newCall(call).execute()
+                onResponse(response.code, response.body?.string() ?: response.message)
+            } catch (e: IOException) {
+                // When error that client doesn't even get the response from server.
+                onError?.invoke(-1, e)
             }
         }
     }

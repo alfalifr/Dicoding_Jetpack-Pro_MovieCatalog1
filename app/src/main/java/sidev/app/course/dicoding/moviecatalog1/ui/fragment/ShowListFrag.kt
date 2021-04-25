@@ -50,7 +50,7 @@ class ShowListFrag: Fragment() {
             }
         }
 
-        vm = ShowListViewModel.getInstance(this, requireContext(), type).apply {
+        vm = ShowListViewModel.getInstance(this, requireActivity().application, type).apply {
             onPreAsyncTask {
                 showNoData(false)
                 showLoading()

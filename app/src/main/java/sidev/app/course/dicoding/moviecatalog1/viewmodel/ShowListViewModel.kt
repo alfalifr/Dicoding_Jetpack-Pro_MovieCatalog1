@@ -1,25 +1,25 @@
 package sidev.app.course.dicoding.moviecatalog1.viewmodel
 
-import android.content.Context
+import android.app.Application
 import androidx.lifecycle.*
 import com.google.gson.JsonParser
-import org.json.JSONObject
 import sidev.app.course.dicoding.moviecatalog1.model.Show
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.Util
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getDouble
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getString
 import sidev.lib.`val`.SuppressLiteral
+import sidev.lib.console.prine
 
-class ShowListViewModel private constructor(
-    c: Context,
+class ShowListViewModel(
+    c: Application?,
     private val type: Const.ShowType,
-): TemplateVm(c) {
+): AsyncVm(c) {
 
     companion object {
         fun getInstance(
             owner: ViewModelStoreOwner,
-            c: Context,
+            c: Application?,
             type: Const.ShowType,
         ): ShowListViewModel = ViewModelProvider(
             owner,
@@ -36,18 +36,19 @@ class ShowListViewModel private constructor(
 
 
     fun downloadShowPopularList(page: Int = 1, forceDownload: Boolean = false){
-        if(!forceDownload && _showList.value == null) return
+        if(!forceDownload && _showList.value != null) return
         cancelJob()
         doOnPreAsyncTask()
         job = Util.httpGet(
-            ctx!!,
+            ctx,
             type.getPopularUrl(page = page), //Const.getTvPopularUrl(page = page),
+            ::doCallNotSuccess
         ){ _, content ->
             content.parseShowListTo(_showList)
         }
     }
 
-    private fun String.parseShowListTo(liveData: MutableLiveData<out List<Show>>){
+    private fun String.parseShowListTo(liveData: MutableLiveData<MutableList<Show>>){
         val json = JsonParser.parseString(this).asJsonObject
         val jsonArray = json.getAsJsonArray(Const.KEY_RESULTS)
         val movies = ArrayList<Show>(jsonArray.size())
@@ -63,6 +64,6 @@ class ShowListViewModel private constructor(
                 movieJson.getDouble(Const.KEY_RATING),
             )
         }
-        liveData.value = movies
+        liveData.postValue(movies)
     }
 }

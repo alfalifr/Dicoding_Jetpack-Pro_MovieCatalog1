@@ -38,7 +38,7 @@ class DetailAct: AppCompatActivity() {
                 .into(ivPoster)
         }
 
-        vm = ShowDetailViewModel.getInstance(this, this, show, showType).apply {
+        vm = ShowDetailViewModel.getInstance(this, application, show, showType).apply {
             onPreAsyncTask {
                 showLoading()
             }
@@ -59,7 +59,7 @@ class DetailAct: AppCompatActivity() {
                 }
                 showLoading(false)
             }
-            downloadShowDetail(show.id)
+            downloadShowDetail()
         }
     }
 
