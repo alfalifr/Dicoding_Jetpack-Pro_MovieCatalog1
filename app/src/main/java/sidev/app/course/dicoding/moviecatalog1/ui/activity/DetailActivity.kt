@@ -11,7 +11,7 @@ import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getDurationString
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowDetailViewModel
 
-class DetailAct: AppCompatActivity() {
+class DetailActivity: AppCompatActivity() {
     private lateinit var binding: DetailPageBinding
     private lateinit var show: Show
     private lateinit var showType: Const.ShowType
@@ -33,7 +33,7 @@ class DetailAct: AppCompatActivity() {
             tvPb.text = getString(R.string.percent, show.rating)
             pbRating.max = 100
             pbRating.progress = show.rating.times(10).toInt()
-            Glide.with(this@DetailAct)
+            Glide.with(this@DetailActivity)
                 .load(show.imgUrl_300x450())
                 .into(ivPoster)
         }
@@ -42,7 +42,7 @@ class DetailAct: AppCompatActivity() {
             onPreAsyncTask {
                 showLoading()
             }
-            showDetail.observe(this@DetailAct){
+            showDetail.observe(this@DetailActivity){
                 if(it != null){
                     binding.apply {
                         tvDuration.text = getDurationString(it) ?: run {
@@ -52,7 +52,7 @@ class DetailAct: AppCompatActivity() {
                         tvGenres.text = it.genres.joinToString()
                         tvTagline.text = it.tagline
                         tvOverviewContent.text = it.overview
-                        Glide.with(this@DetailAct)
+                        Glide.with(this@DetailActivity)
                             .load(it.backdropImgUrl_533x300())
                             .into(ivBg)
                     }

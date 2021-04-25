@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import sidev.app.course.dicoding.moviecatalog1.databinding.PageRvBinding
-import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailAct
+import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailActivity
 import sidev.app.course.dicoding.moviecatalog1.ui.adapter.ShowAdp
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowListViewModel
@@ -37,7 +37,7 @@ class ShowListFrag: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adp = ShowAdp().apply {
             setOnItemClick { _, data ->
-                startAct<DetailAct>(
+                startAct<DetailActivity>(
                     Const.KEY_SHOW to data,
                     Const.KEY_TYPE to type,
                 )

@@ -10,7 +10,7 @@ import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.ui.adapter.ViewPagerAdp
 import sidev.app.course.dicoding.moviecatalog1.util.Util.setupWithViewPager
 
-class MainAct: AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
     private lateinit var binding: ActMainBinding
     private lateinit var vpAdp: ViewPagerAdp
 
