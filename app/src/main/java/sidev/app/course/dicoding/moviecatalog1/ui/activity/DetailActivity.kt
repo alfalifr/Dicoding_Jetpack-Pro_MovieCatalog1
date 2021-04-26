@@ -9,6 +9,7 @@ import sidev.app.course.dicoding.moviecatalog1.databinding.DetailPageBinding
 import sidev.app.course.dicoding.moviecatalog1.model.Show
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
+import sidev.app.course.dicoding.moviecatalog1.util.Config
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getDurationString
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowDetailViewModel
 import java.lang.Exception
@@ -18,7 +19,7 @@ class DetailActivity: AppCompatActivity() {
     private lateinit var show: Show
     private lateinit var showType: Const.ShowType
     private lateinit var vm: ShowDetailViewModel
-    var showRepo = ShowApiRepo
+    private val showRepo = Config.defaultShowRepo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,11 +44,14 @@ class DetailActivity: AppCompatActivity() {
 
         vm = ShowDetailViewModel.getInstance(this, application, showRepo, showType).apply {
             onPreAsyncTask {
+                Config.incIdling()
                 showError(false)
                 showLoading()
             }
             onCallNotSuccess { code, e ->
+                showLoading(false)
                 showError(true, code, e)
+                Config.decIdling()
             }
             showDetail.observe(this@DetailActivity){
                 if(it != null){
@@ -66,13 +70,22 @@ class DetailActivity: AppCompatActivity() {
                 }
                 showError(false)
                 showLoading(false)
+                Config.decIdling()
             }
             downloadShowDetail(show.id)
         }
     }
 
     private fun showLoading(show: Boolean = true)= binding.apply {
-        pb.visibility = if(show) View.VISIBLE else View.GONE
+        if(show){
+            pbLoading.visibility = View.VISIBLE
+            tvOverview.visibility = View.GONE
+            tvOverviewContent.visibility = View.GONE
+        } else {
+            pbLoading.visibility = View.GONE
+            tvOverview.visibility = View.VISIBLE
+            tvOverviewContent.visibility = View.VISIBLE
+        }
     }
 
     private fun showError(show: Boolean = true, code: Int = -1, e: Exception? = null) = binding.apply {

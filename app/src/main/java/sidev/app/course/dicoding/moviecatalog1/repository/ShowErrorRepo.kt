@@ -1,4 +1,4 @@
-package sidev.app.course.dicoding.moviecatalog1
+package sidev.app.course.dicoding.moviecatalog1.repository
 
 import android.content.Context
 import sidev.app.course.dicoding.moviecatalog1.model.Show
@@ -9,7 +9,7 @@ import sidev.app.course.dicoding.moviecatalog1.repository.ShowRepo
 import sidev.app.course.dicoding.moviecatalog1.repository.Success
 import java.io.IOException
 
-object ErrorShowRepo: ShowRepo {
+object ShowErrorRepo: ShowRepo {
     override suspend fun getPopularMovieList(c: Context?): Result<List<Show>> = Failure(404, IOException("Not found"))
     override suspend fun getPopularTvList(c: Context?): Result<List<Show>> = Failure(-1, IOException("Unknown"))
     override suspend fun getMovieDetail(c: Context?, id: String): Result<ShowDetail> = Failure(-1, IOException("Still unknown"))

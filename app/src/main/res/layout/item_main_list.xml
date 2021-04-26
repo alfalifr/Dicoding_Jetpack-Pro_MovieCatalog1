@@ -77,7 +77,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="ajnaoif adnfaoifa avahoh"
+            android:text="@string/release_date"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/iv"
             app:layout_constraintHorizontal_bias="0"

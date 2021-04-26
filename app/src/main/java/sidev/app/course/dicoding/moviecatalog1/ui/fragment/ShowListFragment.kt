@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.databinding.PageRvBinding
-import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailActivity
 import sidev.app.course.dicoding.moviecatalog1.ui.adapter.ShowAdp
 import sidev.app.course.dicoding.moviecatalog1.util.Const
+import sidev.app.course.dicoding.moviecatalog1.util.Config
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowListViewModel
 import sidev.lib.android.std.tool.util.`fun`.startAct
 import java.lang.Exception
@@ -22,7 +22,7 @@ class ShowListFragment: Fragment() {
     private lateinit var adp: ShowAdp
     private lateinit var vm: ShowListViewModel
     private lateinit var type: Const.ShowType
-    var showRepo = ShowApiRepo
+    private val showRepo = Config.defaultShowRepo
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,16 +57,20 @@ class ShowListFragment: Fragment() {
 
         vm = ShowListViewModel.getInstance(this, requireActivity().application, showRepo, type).apply {
             onPreAsyncTask {
+                Config.incIdling()
                 showNoData(false)
                 showLoading()
             }
             onCallNotSuccess { code, e ->
+                showLoading(false)
                 showDataError(true, code, e)
+                Config.decIdling()
             }
             showList.observe(this@ShowListFragment) {
                 adp.dataList = it
                 showLoading(false)
                 showNoData(it == null || it.isEmpty())
+                Config.decIdling()
             }
             downloadShowPopularList(forceDownload = true)
         }
@@ -96,10 +100,10 @@ class ShowListFragment: Fragment() {
 
     private fun showLoading(show: Boolean = true) = binding.apply {
         if(show){
-            pb.visibility = View.VISIBLE
+            pbLoading.visibility = View.VISIBLE
             rv.visibility = View.GONE
         } else {
-            pb.visibility = View.GONE
+            pbLoading.visibility = View.GONE
             rv.visibility = View.VISIBLE
         }
     }

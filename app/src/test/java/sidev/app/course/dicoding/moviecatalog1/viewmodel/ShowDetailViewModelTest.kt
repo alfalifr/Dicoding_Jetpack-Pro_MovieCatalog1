@@ -5,10 +5,11 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import sidev.app.course.dicoding.moviecatalog1.TestingUtil
-import sidev.app.course.dicoding.moviecatalog1.TestingUtil.waitForValue
+import sidev.app.course.dicoding.moviecatalog1.UnitTestingUtil
+import sidev.app.course.dicoding.moviecatalog1.UnitTestingUtil.waitForValue
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
+import sidev.app.course.dicoding.moviecatalog1.util.TestingUtil
 import sidev.lib.console.prin
 import sidev.lib.console.prine
 

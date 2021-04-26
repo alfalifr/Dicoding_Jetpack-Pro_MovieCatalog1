@@ -15,6 +15,7 @@ import sidev.app.course.dicoding.moviecatalog1.util.Util
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getDouble
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getString
 import sidev.lib.`val`.SuppressLiteral
+import sidev.lib.android.std.tool.util.`fun`.loge
 import sidev.lib.console.prine
 
 class ShowListViewModel(

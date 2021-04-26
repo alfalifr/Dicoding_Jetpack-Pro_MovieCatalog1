@@ -6,7 +6,7 @@ import org.junit.Before
 import org.junit.Test
 
 import org.junit.Rule
-import sidev.app.course.dicoding.moviecatalog1.TestingUtil.waitForValue
+import sidev.app.course.dicoding.moviecatalog1.UnitTestingUtil.waitForValue
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.lib.console.prin

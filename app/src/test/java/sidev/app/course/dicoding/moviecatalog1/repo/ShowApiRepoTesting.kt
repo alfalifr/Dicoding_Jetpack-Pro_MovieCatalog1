@@ -39,11 +39,11 @@ class ShowApiRepoTesting {
         val detail = repo.getMovieDetail(null, monsterHunterId)
         assert(detail is Success)
         (detail as Success).data.apply {
-            assertEquals(show.id, monsterHunterId)
-            assertEquals(show.title, monsterHunterTitle)
-            assertEquals(show.release, monsterHunterRelease)
+            assertEquals(monsterHunterId, show.id)
+            assertEquals(monsterHunterTitle, show.title)
+            assertEquals(monsterHunterRelease, show.release)
             assert(overview.isNotBlank())
-            assertEquals(tagline, monsterHunterTagline)
+            assertEquals(monsterHunterTagline, tagline)
         }
     }
 
@@ -60,9 +60,9 @@ class ShowApiRepoTesting {
         val detail = repo.getTvDetail(null, aotId)
         assert(detail is Success)
         (detail as Success).data.apply {
-            assertEquals(show.id, aotId)
-            assertEquals(show.title, aotTitle)
-            assertEquals(show.release, aotRelease)
+            assertEquals(aotId, show.id)
+            assertEquals(aotTitle, show.title)
+            assertEquals(aotRelease, show.release)
             assert(overview.isNotBlank())
             assert(overview.contains(aotOverviewPart))
         }

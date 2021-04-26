@@ -1,33 +1,22 @@
 package sidev.app.course.dicoding.moviecatalog1
 
+import android.view.View
+import androidx.annotation.IdRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.ViewAssertion
+import org.hamcrest.Matcher
 import sidev.app.course.dicoding.moviecatalog1.model.Show
 import sidev.app.course.dicoding.moviecatalog1.model.ShowDetail
 import sidev.lib.`val`.SuppressLiteral
+import sidev.lib.check.assertNotNull
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
-object TestingUtil {
-    const val DEFAULT_ASYNC_TIMEOUT = 5000L
-
-    val dummyShowItem = Show(
-        id="458576",
-        title="Monster Hunter",
-        img="/1UCOF11QCw8kcqvce8LKOO6pimh.jpg",
-        release="2020-12-03",
-        rating=7.1
-    )
-
-    val dummyShowDetail = ShowDetail(
-        dummyShowItem,
-        listOf("Cooking", "Action"),
-        145,
-        "He keeps moving forward until all his enemies get destroyed",
-        "When Erwin has his 'SASAGEYO', Eren has his 'TATAKAE'",
-        "/yvKrycViRMQcIgdnjsM5JGNWU4Q.jpg"
-    )
+object UnitTestingUtil {
+    const val DEFAULT_ASYNC_TIMEOUT = 10000L
 
     fun <T> LiveData<T>.waitForValue(
         timeout: Long = DEFAULT_ASYNC_TIMEOUT,

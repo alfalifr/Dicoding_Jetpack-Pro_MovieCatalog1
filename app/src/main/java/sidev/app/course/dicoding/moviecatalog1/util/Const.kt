@@ -67,5 +67,5 @@ object Const {
     const val KEY_BACKDROP = "backdrop_path"
     const val KEY_MOVIE_DURATION = "runtime"
 
-    const val DEFAULT_TIMEOUT = 5000L //in millisecs
+    const val DEFAULT_TIMEOUT = 10000L //in millisecs
 }

@@ -8,10 +8,10 @@
     <string name="progress_template">100%</string>
     <string name="percent">%.2f %%</string>
     <string name="no_data">No Data</string>
-    <string name="error_data">Error: %s, cause: %s</string>
+    <string name="error_data" translatable="false">Error: %s, cause: %s</string>
     <string name="template_title">This is the Title</string>
-    <string name="template_date">10/04/2021</string>
-    <string name="template_genres">action, horror, comedy</string>
+    <string name="template_date" translatable="false">dd/MM/yyyy</string>
+    <string name="template_genres" translatable="false">genre1, genre2, genre3</string>
     <string name="template_duration">1h 3m</string>
     <string name="user_score">User \n Score</string>
     <string name="template_tagline">This is Tagline</string>
