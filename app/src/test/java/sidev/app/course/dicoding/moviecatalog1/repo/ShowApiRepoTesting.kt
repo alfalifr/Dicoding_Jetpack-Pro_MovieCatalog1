@@ -42,8 +42,8 @@ class ShowApiRepoTesting {
             assertEquals(monsterHunterId, show.id)
             assertEquals(monsterHunterTitle, show.title)
             assertEquals(monsterHunterRelease, show.release)
-            assert(overview.isNotBlank())
             assertEquals(monsterHunterTagline, tagline)
+            assert(overview.isNotBlank())
         }
     }
 

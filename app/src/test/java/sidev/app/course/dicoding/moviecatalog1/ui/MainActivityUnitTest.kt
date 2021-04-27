@@ -50,9 +50,12 @@ class MainActivityUnitTest {
 
         val act = createActivity()
 
+        // Assert RecyclerView is displayed.
         val rv = act.findViewById<RecyclerView>(R.id.rv)
         assertNotNull(rv)
+        assert(ViewMatchers.isDisplayed().matches(rv))
 
+        // Assert RecyclerView's LayoutManger is not null.
         val lm = rv.layoutManager
         assertNotNull(lm)
 

@@ -54,8 +54,10 @@ class DetailActivityUnitTest {
 
     @Test
     fun showDetail(){
+        // Use dummy repo because Robolectric can't integrate with Espresso Idling Resource.
         TestingUtil.defaultShowRepo = ShowDummyRepo
         val data = TestingUtil.dummyShowDetail
+
         val act = createActivity()
 
         // Assert loading progres bar should be gone.
@@ -89,7 +91,7 @@ class DetailActivityUnitTest {
             textMatcher { it == data.genres.joinToString() && it != genresTemplate }.matches(tvGenres)
         )
 
-        // Assert Overview header is displayed.
+        // Assert overview header is displayed.
         val tvOverview = act.findViewById<TextView>(R.id.tv_overview)
         assert(
             ViewMatchers.isDisplayed().matches(tvOverview)

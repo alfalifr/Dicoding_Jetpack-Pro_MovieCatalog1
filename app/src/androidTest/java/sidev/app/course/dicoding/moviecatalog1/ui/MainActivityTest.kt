@@ -45,7 +45,7 @@ class MainActivityTest {
                     0, ViewMatchers.isDisplayed()
                 )
             )
-            // Assert title is displayed and not template
+            // Assert first item title is displayed and not template
             val strTitle = ApplicationProvider.getApplicationContext<Context>().getString(R.string.title)
             check(
                 AndroidTestingUtil.RecyclerViewAssertion.isChildIdInPositionDisplayed(
@@ -55,7 +55,7 @@ class MainActivityTest {
                     }
                 )
             )
-            // Assert release date is displayed and not template
+            // Assert first item release date is displayed and not template
             val relDatTitle = ApplicationProvider.getApplicationContext<Context>().getString(R.string.release_date)
             check(
                 AndroidTestingUtil.RecyclerViewAssertion.isChildIdInPositionDisplayed(

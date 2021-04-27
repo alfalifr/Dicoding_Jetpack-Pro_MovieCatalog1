@@ -33,6 +33,9 @@ class ShowDetailViewModelTest {
 
         val data = vm.showDetail.waitForValue()
         assertNotNull(data)
+        assert(data.show.title.isNotBlank())
+        assert(data.show.id.isNotBlank())
+        assert(data.show.release.isNotBlank())
         assert(data.overview.isNotBlank())
         prin(data)
     }

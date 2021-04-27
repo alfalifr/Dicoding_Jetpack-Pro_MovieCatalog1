@@ -84,7 +84,7 @@ class DetailActivityTest {
                 }
             )
         )
-        // Assert Overview header is displayed.
+        // Assert overview header is displayed.
         onView(withId(R.id.tv_overview)).check(
             ViewAssertions.matches(
                 ViewMatchers.isDisplayed()
