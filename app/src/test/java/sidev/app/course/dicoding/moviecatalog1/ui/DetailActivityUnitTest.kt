@@ -7,11 +7,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.After
 import org.junit.Assert.assertNotNull
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
@@ -21,7 +19,6 @@ import sidev.app.course.dicoding.moviecatalog1.RobolectricTestingUtil
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowDummyRepo
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowErrorRepo
 import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailActivity
-import sidev.app.course.dicoding.moviecatalog1.ui.activity.MainActivity
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.TestingUtil
 

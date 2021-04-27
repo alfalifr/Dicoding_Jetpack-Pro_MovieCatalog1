@@ -25,7 +25,6 @@ object Const {
     private const val ENDPOINT_PUBLIC = "https://themoviedb.org"
 
     private const val ENDPOINT_IMG = "$ENDPOINT_PUBLIC/t/p"
-    private const val ENDPOINT_IMG_220x330 = "$ENDPOINT_IMG/w220_and_h330_face"
     private const val ENDPOINT_IMG_300x450 = "$ENDPOINT_IMG/w300_and_h450_bestv2"
     private const val ENDPOINT_IMG_533x300 = "$ENDPOINT_IMG/w533_and_h300_bestv2"
 

@@ -1,6 +1,5 @@
 package sidev.app.course.dicoding.moviecatalog1.ui.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +11,6 @@ import sidev.app.course.dicoding.moviecatalog1.model.Show
 class ShowAdp: RecyclerView.Adapter<ShowAdp.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemMainListBinding): RecyclerView.ViewHolder(binding.root){
-        @SuppressLint("SetTextI18n", )
         fun bind(data: Show) = binding.apply {
             tvTitle.text = data.title
             tvRelease.text = data.getFormattedDate()

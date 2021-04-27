@@ -24,7 +24,7 @@ import sidev.app.course.dicoding.moviecatalog1.util.TestingUtil
 class DetailActivityTest {
 
     @get:Rule
-    val actRule = ActivityScenarioRule(MainActivity::class.java,)
+    val actRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Before
     fun setup(){

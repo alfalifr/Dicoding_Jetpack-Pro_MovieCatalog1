@@ -11,7 +11,6 @@ import com.android.volley.toolbox.HttpHeaderParser
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -20,7 +19,6 @@ import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
-import org.json.JSONObject
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.model.ShowDetail
 import sidev.lib.android.std.tool.util._NetworkUtil
@@ -91,8 +89,6 @@ object Util {
         }
     }
 
-    fun JSONObject.getIntOrNull(key: String): Int? = if(has(key)) getInt(key) else null
-
     fun formatDate(dateString: String): String {
         val dates = dateString.split("-")
         val cal = Calendar.getInstance()
@@ -128,7 +124,4 @@ object Util {
     fun JsonObject.getString(key: String): String = getAsJsonPrimitive(key).asString
     fun JsonObject.getIntOrNull(key: String): Int? = if(has(key)) getAsJsonPrimitive(key).asInt else null
     fun JsonObject.getDouble(key: String): Double = getAsJsonPrimitive(key).asDouble
-
-    fun JsonArray.getString(i: Int): String = this[i].asString
-    fun JsonArray.getDouble(i: Int): Double = this[i].asDouble
 }

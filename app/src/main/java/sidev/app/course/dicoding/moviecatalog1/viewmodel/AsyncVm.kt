@@ -1,5 +1,6 @@
 package sidev.app.course.dicoding.moviecatalog1.viewmodel
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.annotation.CallSuper
@@ -13,6 +14,7 @@ import java.lang.Exception
  * Template for all ViewModel in this project.
  * This class mimics [AndroidViewModel] but with optional [app] parameter for convinience in unit testing.
  */
+@SuppressLint("StaticFieldLeak")
 open class AsyncVm(app: Application?): ViewModel() {
     protected var ctx: Context? = app
         private set

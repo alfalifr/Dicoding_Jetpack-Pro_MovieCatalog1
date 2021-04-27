@@ -1,7 +1,6 @@
 package sidev.app.course.dicoding.moviecatalog1.util
 
 import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
 
 class CountingLatch(initCount: Int = 1) {
     @Volatile
