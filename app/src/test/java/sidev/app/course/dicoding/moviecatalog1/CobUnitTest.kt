@@ -7,7 +7,6 @@ import kotlinx.coroutines.runBlocking
 import okhttp3.*
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Matchers
 import org.mockito.Mockito
 import sidev.app.course.dicoding.moviecatalog1.model.Show
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo

@@ -10,11 +10,9 @@ import androidx.test.espresso.ViewAssertion
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
-import sidev.lib.android.std.tool.util.`fun`.loge
 import sidev.lib.check.assertNotNull
-import sidev.lib.console.prine
-import androidx.test.espresso.matcher.ViewMatchers as AndroidViewMathcers
 import androidx.test.espresso.action.ViewActions as AndroidViewActions
+import androidx.test.espresso.matcher.ViewMatchers as AndroidViewMathcers
 
 object AndroidTestingUtil {
     object ViewActions {

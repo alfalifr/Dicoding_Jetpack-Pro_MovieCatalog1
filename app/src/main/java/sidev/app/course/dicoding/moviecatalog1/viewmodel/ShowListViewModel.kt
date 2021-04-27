@@ -2,7 +2,6 @@ package sidev.app.course.dicoding.moviecatalog1.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.google.gson.JsonParser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -11,12 +10,7 @@ import sidev.app.course.dicoding.moviecatalog1.repository.Failure
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowRepo
 import sidev.app.course.dicoding.moviecatalog1.repository.Success
 import sidev.app.course.dicoding.moviecatalog1.util.Const
-import sidev.app.course.dicoding.moviecatalog1.util.Util
-import sidev.app.course.dicoding.moviecatalog1.util.Util.getDouble
-import sidev.app.course.dicoding.moviecatalog1.util.Util.getString
 import sidev.lib.`val`.SuppressLiteral
-import sidev.lib.android.std.tool.util.`fun`.loge
-import sidev.lib.console.prine
 
 class ShowListViewModel(
     c: Application?,

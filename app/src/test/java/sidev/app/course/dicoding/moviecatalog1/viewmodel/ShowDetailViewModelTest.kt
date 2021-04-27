@@ -1,11 +1,10 @@
 package sidev.app.course.dicoding.moviecatalog1.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import org.junit.Assert.*
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import sidev.app.course.dicoding.moviecatalog1.UnitTestingUtil
 import sidev.app.course.dicoding.moviecatalog1.UnitTestingUtil.waitForValue
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const

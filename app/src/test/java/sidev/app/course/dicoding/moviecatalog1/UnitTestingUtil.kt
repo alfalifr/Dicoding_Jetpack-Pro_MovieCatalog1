@@ -1,16 +1,8 @@
 package sidev.app.course.dicoding.moviecatalog1
 
-import android.view.View
-import androidx.annotation.IdRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.ViewAssertion
-import org.hamcrest.Matcher
-import sidev.app.course.dicoding.moviecatalog1.model.Show
-import sidev.app.course.dicoding.moviecatalog1.model.ShowDetail
 import sidev.lib.`val`.SuppressLiteral
-import sidev.lib.check.assertNotNull
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException

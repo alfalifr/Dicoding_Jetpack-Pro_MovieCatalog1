@@ -2,7 +2,6 @@ package sidev.app.course.dicoding.moviecatalog1.util
 
 import sidev.app.course.dicoding.moviecatalog1.BuildConfig
 import java.io.Serializable
-import java.util.*
 
 object Const {
     enum class ShowType: Serializable {

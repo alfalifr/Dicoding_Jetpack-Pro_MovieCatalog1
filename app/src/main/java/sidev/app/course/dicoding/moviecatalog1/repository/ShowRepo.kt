@@ -3,7 +3,6 @@ package sidev.app.course.dicoding.moviecatalog1.repository
 import android.content.Context
 import sidev.app.course.dicoding.moviecatalog1.model.Show
 import sidev.app.course.dicoding.moviecatalog1.model.ShowDetail
-import sidev.app.course.dicoding.moviecatalog1.util.Const
 
 interface ShowRepo {
     suspend fun getPopularMovieList(c: Context?): Result<List<Show>>

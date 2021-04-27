@@ -18,8 +18,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import okhttp3.Call
-import okhttp3.Callback
 import okhttp3.OkHttpClient
 import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
@@ -28,8 +26,6 @@ import org.json.JSONObject
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.model.ShowDetail
 import sidev.lib.android.std.tool.util._NetworkUtil
-import sidev.lib.android.std.tool.util.`fun`.loge
-import sidev.lib.console.prine
 import sidev.lib.structure.data.value.varOf
 import java.io.IOException
 import java.text.SimpleDateFormat

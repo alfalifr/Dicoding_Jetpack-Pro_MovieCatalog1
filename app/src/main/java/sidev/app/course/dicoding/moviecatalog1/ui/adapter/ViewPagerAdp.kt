@@ -3,8 +3,6 @@ package sidev.app.course.dicoding.moviecatalog1.ui.adapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.test.espresso.IdlingResource
-import androidx.test.espresso.idling.CountingIdlingResource
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import sidev.app.course.dicoding.moviecatalog1.ui.fragment.ShowListFragment
 import sidev.app.course.dicoding.moviecatalog1.util.Const
