@@ -2,6 +2,7 @@ package sidev.app.course.dicoding.moviecatalog1.ui
 
 import android.content.Context
 import android.os.Build
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.*
 import androidx.test.espresso.Espresso.onView
@@ -22,6 +23,7 @@ import sidev.app.course.dicoding.moviecatalog1.repository.ShowEmptyRepo
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowErrorRepo
 import sidev.app.course.dicoding.moviecatalog1.ui.activity.MainActivity
 import sidev.app.course.dicoding.moviecatalog1.util.Config
+import sidev.lib.console.prine
 
 @RunWith(AndroidJUnit4::class)
 @org.robolectric.annotation.Config(sdk = [Build.VERSION_CODES.P])
@@ -50,9 +52,20 @@ class MainActivityUnitTest {
             .visible()
             .get()
 
-        getShowList()
+        //getShowList()
+        val rv = act.findViewById<RecyclerView>(R.id.rv)
+        val adp = rv.adapter
+
+        Thread.sleep(7000)
+        val v = rv.layoutManager?.findViewByPosition(0)
+        val b = ViewMatchers.isDisplayed().matches(v)
+
+        prine("adp?.itemCount= ${adp?.itemCount}")
+        prine("rv= $rv")
+        prine("v= $v")
+        prine("b= $b")
     }
-    
+
     @Test
     fun getShowList(){
         onView(withId(R.id.rv)).apply {
