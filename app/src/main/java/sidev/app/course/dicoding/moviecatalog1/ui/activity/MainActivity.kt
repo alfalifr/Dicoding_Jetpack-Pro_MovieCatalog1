@@ -16,6 +16,8 @@ class MainActivity: AppCompatActivity() {
         binding = ActMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setTitle(R.string.show_list)
+
         vpAdp = ViewPagerAdp(this)
 
         binding.apply {

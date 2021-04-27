@@ -25,6 +25,8 @@ class DetailActivity: AppCompatActivity() {
         binding = DetailPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setTitle(R.string.show_detail)
+
         intent.apply {
             show = intent.getSerializableExtra(Const.KEY_SHOW) as Show
             showType = intent.getSerializableExtra(Const.KEY_TYPE) as Const.ShowType
