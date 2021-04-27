@@ -1,4 +1,4 @@
-package sidev.app.course.dicoding.moviecatalog1.ui.activity
+package sidev.app.course.dicoding.moviecatalog1.ui
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
@@ -16,6 +16,7 @@ import sidev.app.course.dicoding.moviecatalog1.AndroidTestingUtil
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowEmptyRepo
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowErrorRepo
+import sidev.app.course.dicoding.moviecatalog1.ui.activity.MainActivity
 import sidev.app.course.dicoding.moviecatalog1.util.TestingUtil
 
 class MainActivityTest {
