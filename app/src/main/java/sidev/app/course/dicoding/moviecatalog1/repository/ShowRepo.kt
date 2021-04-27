@@ -9,6 +9,4 @@ interface ShowRepo {
     suspend fun getPopularTvList(c: Context?): Result<List<Show>>
     suspend fun getMovieDetail(c: Context?, id: String): Result<ShowDetail>
     suspend fun getTvDetail(c: Context?, id: String): Result<ShowDetail>
-    //suspend fun getPopularShowList(c: Context?, type: Const.ShowType): Result<List<Show>>
-    //suspend fun getShowDetail(c: Context?, type: Const.ShowType, showId: String): Result<ShowDetail>
 }

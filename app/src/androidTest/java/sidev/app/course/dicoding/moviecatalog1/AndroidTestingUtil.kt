@@ -42,12 +42,7 @@ object AndroidTestingUtil {
                 override fun matchesSafely(item: View?): Boolean = !matcher.matches(item)
             }
         }
-        fun isDisplayedAndMatches(predicate: (View) -> Boolean): Matcher<View> {
-            val matcher = AndroidViewMathcers.isDisplayed()
-            return object: Matcher<View> by matcher {
-                override fun matches(item: Any?): Boolean = matcher.matches(item) && predicate(item as View)
-            }
-        }
+
         fun textMatches(predicate: (String) -> Boolean): Matcher<View> = object: TypeSafeMatcher<View>() {
             override fun describeTo(description: Description?) {
                 description?.appendText("with text matches predicate()")

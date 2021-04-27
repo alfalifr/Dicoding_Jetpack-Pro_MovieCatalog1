@@ -30,7 +30,7 @@ object ShowApiRepo: ShowRepo {
         val container = nullableVarOf<Result<*>>()
         Util.httpGet(
             c,
-            type.getPopularUrl(), //Const.getTvPopularUrl(page = page),
+            type.getPopularUrl(),
             doOnNotSucces(lock, container)
         ){ _, content ->
             shows = content.parseShowList()
@@ -41,7 +41,6 @@ object ShowApiRepo: ShowRepo {
                 @Suppress(SuppressLiteral.UNCHECKED_CAST)
                 container.value as Result<List<Show>>
             }
-            //@Suppress("BlockingMethodInNonBlockingContext")
             lock.await(Const.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS).not() ->
                 Failure(1, TimeoutException("Can't get list of shows."))
             else -> Success(shows)

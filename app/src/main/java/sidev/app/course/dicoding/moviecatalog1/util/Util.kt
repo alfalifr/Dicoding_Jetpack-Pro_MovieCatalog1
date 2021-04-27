@@ -1,7 +1,6 @@
 package sidev.app.course.dicoding.moviecatalog1.util
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.NetworkResponse
@@ -21,7 +20,6 @@ import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
-import org.json.JSONArray
 import org.json.JSONObject
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.model.ShowDetail
@@ -65,7 +63,7 @@ object Util {
         }
     }
 
-    fun createVolleyRequest(
+    private fun createVolleyRequest(
         method: Int,
         url: String,
         onError: ((code: Int, e: VolleyError) -> Unit)?= null,
@@ -93,12 +91,6 @@ object Util {
         }
     }
 
-    fun getSharedPref(ctx: Context, mode: Int = Context.MODE_PRIVATE): SharedPreferences =
-        ctx.getSharedPreferences(Const.SHARED_PREF_NAME, mode)
-
-    fun JSONArray.forEach(f: (JSONObject) -> Unit) {
-        for(i in 0 until length()) f(getJSONObject(i))
-    }
     fun JSONObject.getIntOrNull(key: String): Int? = if(has(key)) getInt(key) else null
 
     fun formatDate(dateString: String): String {
@@ -134,11 +126,9 @@ object Util {
     }
 
     fun JsonObject.getString(key: String): String = getAsJsonPrimitive(key).asString
-    fun JsonObject.getInt(key: String): Int = getAsJsonPrimitive(key).asInt
     fun JsonObject.getIntOrNull(key: String): Int? = if(has(key)) getAsJsonPrimitive(key).asInt else null
     fun JsonObject.getDouble(key: String): Double = getAsJsonPrimitive(key).asDouble
 
     fun JsonArray.getString(i: Int): String = this[i].asString
-    fun JsonArray.getInt(i: Int): Int = this[i].asInt
     fun JsonArray.getDouble(i: Int): Double = this[i].asDouble
 }

@@ -21,7 +21,6 @@
         <activity android:name=".ui.activity.DetailActivity" />
 
         <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.DummyAct"/>
     </application>
 
 </manifest>

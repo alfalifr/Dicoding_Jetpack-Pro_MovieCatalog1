@@ -14,8 +14,6 @@ data class Show(
     val release: String,
     val rating: Double,
 ): Serializable {
-    fun imgUrl_220x330(): String = Const.getImgUrl_220x330(img)
     fun imgUrl_300x450(): String = Const.getImgUrl_300x450(img)
-    fun imgUrl_533x300(): String = Const.getImgUrl_533x300(img)
     fun getFormattedDate(): String = Util.formatDate(release)
 }

@@ -38,7 +38,7 @@ class ShowListViewModel(
     private val _showList: MutableLiveData<List<Show>> = MutableLiveData()
 
 
-    fun downloadShowPopularList(/*page: Int = 1, */forceDownload: Boolean = false){
+    fun downloadShowPopularList(forceDownload: Boolean = false){
         if(!forceDownload && _showList.value != null) return
         cancelJob()
         doOnPreAsyncTask()

@@ -61,10 +61,12 @@ class DetailActivityUnitTest {
         val data = TestingUtil.dummyShowDetail
         val act = createActivity()
 
+        // Assert loading progres bar should be gone.
         val pb = act.findViewById<View>(R.id.pb_loading)
         assertNotNull(pb)
         assert(!ViewMatchers.isDisplayed().matches(pb))
 
+        // Assert error TextView should be gone.
         val tvError = act.findViewById<TextView>(R.id.tv_error)
         assertNotNull(tvError)
         assert(!ViewMatchers.isDisplayed().matches(tvError))

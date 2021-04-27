@@ -10,7 +10,7 @@ import sidev.app.course.dicoding.moviecatalog1.repository.Success
 
 class ShowApiRepoTesting {
 
-    val repo = ShowApiRepo
+    private val repo = ShowApiRepo
 
     @Test
     fun getPopularMovieList(): Unit = runBlocking {

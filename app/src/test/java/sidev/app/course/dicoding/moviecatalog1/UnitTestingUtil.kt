@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
 object UnitTestingUtil {
-    const val DEFAULT_ASYNC_TIMEOUT = 10000L
+    private const val DEFAULT_ASYNC_TIMEOUT = 10000L
 
     fun <T> LiveData<T>.waitForValue(
         timeout: Long = DEFAULT_ASYNC_TIMEOUT,

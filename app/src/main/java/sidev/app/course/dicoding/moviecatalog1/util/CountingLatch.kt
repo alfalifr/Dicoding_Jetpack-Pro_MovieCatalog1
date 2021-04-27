@@ -7,9 +7,6 @@ class CountingLatch(initCount: Int = 1) {
     @Volatile
     private var lock= CountDownLatch(initCount)
 
-    val count: Long
-        get()= lock.count
-
     fun increment(){
         lock = CountDownLatch(lock.count.toInt() + 1)
     }
@@ -17,6 +14,4 @@ class CountingLatch(initCount: Int = 1) {
         lock.countDown()
     }
 
-    fun await(timeout: Long = Const.DEFAULT_TIMEOUT, timeUnit: TimeUnit = TimeUnit.MILLISECONDS): Boolean =
-        lock.await(timeout, timeUnit)
 }

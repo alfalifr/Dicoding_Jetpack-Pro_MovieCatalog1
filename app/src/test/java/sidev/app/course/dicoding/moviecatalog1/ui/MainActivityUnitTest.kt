@@ -116,7 +116,7 @@ class MainActivityUnitTest {
         val pb = act.findViewById<View>(R.id.pb_loading)
         assert(!ViewMatchers.isDisplayed().matches(pb))
 
-        // Assert error TextView is displayed and shows no data message
+        // Assert error TextView is displayed and shows no data message.
         val tvNoData = act.findViewById<TextView>(R.id.tv_no_data)
         val strNoData = ApplicationProvider.getApplicationContext<Context>().getString(R.string.no_data)
         assert(ViewMatchers.isDisplayed().matches(tvNoData))

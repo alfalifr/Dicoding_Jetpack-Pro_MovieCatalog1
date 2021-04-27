@@ -15,7 +15,6 @@ import sidev.lib.`val`.SuppressLiteral
 class ShowDetailViewModel(
     c: Application?,
     private val repo: ShowRepo,
-    //private val show: Show,
     private val type: Const.ShowType,
 ): AsyncVm(c) {
 
