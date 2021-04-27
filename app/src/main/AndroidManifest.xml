@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DicodingJetpackProMovieCatalog1" >
 
-        <activity android:name=".ui.activity.MainActivity" >
+        <activity android:name=".ui.activity.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".ui.activity.DetailActivity" />
 
+        <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.DummyAct"/>
     </application>
 

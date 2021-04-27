@@ -17,6 +17,10 @@ import androidx.test.espresso.matcher.ViewMatchers as AndroidViewMathcers
 import androidx.test.espresso.action.ViewActions as AndroidViewActions
 
 object RobolectricTestingUtil {
+    fun RecyclerView.setupView(){
+        measure(0, 0)
+        layout(0, 0, 100, 10000)
+    }
     object ViewActions {
         fun clickAndBefore(f: () -> Unit): ViewAction {
             val action = AndroidViewActions.click()

@@ -28,6 +28,7 @@ import org.json.JSONObject
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.model.ShowDetail
 import sidev.lib.android.std.tool.util._NetworkUtil
+import sidev.lib.android.std.tool.util.`fun`.loge
 import sidev.lib.console.prine
 import sidev.lib.structure.data.value.varOf
 import java.io.IOException
@@ -78,7 +79,7 @@ object Util {
         return object: StringRequest(
             method,
             url,
-            Response.Listener { onResponse(code.value, it.also { prine("response= $it") }) },
+            Response.Listener { onResponse(code.value, it) },
             Response.ErrorListener { onError?.invoke(it.networkResponse?.statusCode ?: -1, it) }
         ) {
             override fun parseNetworkResponse(response: NetworkResponse?): Response<String> {

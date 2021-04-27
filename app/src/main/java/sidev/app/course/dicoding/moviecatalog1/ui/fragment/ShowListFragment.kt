@@ -11,7 +11,7 @@ import sidev.app.course.dicoding.moviecatalog1.databinding.PageRvBinding
 import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailActivity
 import sidev.app.course.dicoding.moviecatalog1.ui.adapter.ShowAdp
 import sidev.app.course.dicoding.moviecatalog1.util.Const
-import sidev.app.course.dicoding.moviecatalog1.util.Config
+import sidev.app.course.dicoding.moviecatalog1.util.TestingUtil
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowListViewModel
 import sidev.lib.android.std.tool.util.`fun`.startAct
 import java.lang.Exception
@@ -22,7 +22,7 @@ class ShowListFragment: Fragment() {
     private lateinit var adp: ShowAdp
     private lateinit var vm: ShowListViewModel
     private lateinit var type: Const.ShowType
-    private val showRepo = Config.defaultShowRepo
+    private val showRepo = TestingUtil.defaultShowRepo
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,20 +57,20 @@ class ShowListFragment: Fragment() {
 
         vm = ShowListViewModel.getInstance(this, requireActivity().application, showRepo, type).apply {
             onPreAsyncTask {
-                Config.incIdling()
+                TestingUtil.incUiAsync()
                 showNoData(false)
                 showLoading()
             }
             onCallNotSuccess { code, e ->
                 showLoading(false)
                 showDataError(true, code, e)
-                Config.decIdling()
+                TestingUtil.decUiAsync()
             }
             showList.observe(this@ShowListFragment) {
                 adp.dataList = it
                 showLoading(false)
                 showNoData(it == null || it.isEmpty())
-                Config.decIdling()
+                TestingUtil.decUiAsync()
             }
             downloadShowPopularList(forceDownload = true)
         }

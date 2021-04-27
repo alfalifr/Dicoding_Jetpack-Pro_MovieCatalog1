@@ -18,7 +18,7 @@ import org.junit.Test
 import sidev.app.course.dicoding.moviecatalog1.AndroidTestingUtil
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowErrorRepo
-import sidev.app.course.dicoding.moviecatalog1.util.Config
+import sidev.app.course.dicoding.moviecatalog1.util.TestingUtil
 
 class DetailActivityTest {
 
@@ -27,13 +27,14 @@ class DetailActivityTest {
 
     @Before
     fun setup(){
-        Config.isTest = true
-        IdlingRegistry.getInstance().register(Config.idlingRes)
+        TestingUtil.isUiAsyncTest = true
+        IdlingRegistry.getInstance().register(TestingUtil.idlingRes)
     }
 
     @After
     fun finish(){
-        IdlingRegistry.getInstance().unregister(Config.idlingRes)
+        IdlingRegistry.getInstance().unregister(TestingUtil.idlingRes)
+        TestingUtil.resetDefautlShowRepo()
     }
 
     @Test
@@ -107,7 +108,7 @@ class DetailActivityTest {
                 0,
                 AndroidTestingUtil.ViewActions.clickAndBefore {
                     // Before moving to detail page, switch the repo first.
-                    Config.defaultShowRepo = ShowErrorRepo
+                    TestingUtil.defaultShowRepo = ShowErrorRepo
                 }
             )
         )
@@ -139,6 +140,5 @@ class DetailActivityTest {
                 AndroidTestingUtil.ViewMatchers.isNotDisplayed()
             )
         )
-        Config.resetDefautlShowRepo()
     }
 }

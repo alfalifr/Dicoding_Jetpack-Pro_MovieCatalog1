@@ -7,9 +7,8 @@ import com.bumptech.glide.Glide
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.databinding.DetailPageBinding
 import sidev.app.course.dicoding.moviecatalog1.model.Show
-import sidev.app.course.dicoding.moviecatalog1.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
-import sidev.app.course.dicoding.moviecatalog1.util.Config
+import sidev.app.course.dicoding.moviecatalog1.util.TestingUtil
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getDurationString
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowDetailViewModel
 import java.lang.Exception
@@ -19,7 +18,7 @@ class DetailActivity: AppCompatActivity() {
     private lateinit var show: Show
     private lateinit var showType: Const.ShowType
     private lateinit var vm: ShowDetailViewModel
-    private val showRepo = Config.defaultShowRepo
+    private val showRepo = TestingUtil.defaultShowRepo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,14 +43,14 @@ class DetailActivity: AppCompatActivity() {
 
         vm = ShowDetailViewModel.getInstance(this, application, showRepo, showType).apply {
             onPreAsyncTask {
-                Config.incIdling()
+                TestingUtil.incUiAsync()
                 showError(false)
                 showLoading()
             }
             onCallNotSuccess { code, e ->
                 showLoading(false)
                 showError(true, code, e)
-                Config.decIdling()
+                TestingUtil.decUiAsync()
             }
             showDetail.observe(this@DetailActivity){
                 if(it != null){
@@ -70,7 +69,7 @@ class DetailActivity: AppCompatActivity() {
                 }
                 showError(false)
                 showLoading(false)
-                Config.decIdling()
+                TestingUtil.decUiAsync()
             }
             downloadShowDetail(show.id)
         }

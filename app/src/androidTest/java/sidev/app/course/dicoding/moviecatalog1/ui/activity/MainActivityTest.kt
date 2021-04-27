@@ -8,7 +8,6 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -17,7 +16,7 @@ import sidev.app.course.dicoding.moviecatalog1.AndroidTestingUtil
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowEmptyRepo
 import sidev.app.course.dicoding.moviecatalog1.repository.ShowErrorRepo
-import sidev.app.course.dicoding.moviecatalog1.util.Config
+import sidev.app.course.dicoding.moviecatalog1.util.TestingUtil
 
 class MainActivityTest {
 
@@ -26,13 +25,14 @@ class MainActivityTest {
 
     @Before
     fun setup(){
-        Config.isTest = true
-        IdlingRegistry.getInstance().register(Config.idlingRes)
+        TestingUtil.isUiAsyncTest = true
+        IdlingRegistry.getInstance().register(TestingUtil.idlingRes)
     }
 
     @After
     fun finish(){
-        IdlingRegistry.getInstance().unregister(Config.idlingRes)
+        IdlingRegistry.getInstance().unregister(TestingUtil.idlingRes)
+        TestingUtil.resetDefautlShowRepo()
     }
 
     @Test
@@ -81,7 +81,7 @@ class MainActivityTest {
 
     @Test
     fun getShowListOnError(){
-        Config.defaultShowRepo = ShowErrorRepo
+        TestingUtil.defaultShowRepo = ShowErrorRepo
         // Assert RecyclerView should be gone.
         onView(withId(R.id.rv)).check(
             ViewAssertions.matches(
@@ -103,12 +103,11 @@ class MainActivityTest {
                 }
             )
         )
-        Config.resetDefautlShowRepo()
     }
 
     @Test
     fun getShowListOnNoData(){
-        Config.defaultShowRepo = ShowEmptyRepo
+        TestingUtil.defaultShowRepo = ShowEmptyRepo
         // Assert RecyclerView should be gone.
         onView(withId(R.id.rv)).check(
             ViewAssertions.matches(
@@ -128,6 +127,5 @@ class MainActivityTest {
                 ViewMatchers.withText(strNoData)
             )
         )
-        Config.resetDefautlShowRepo()
     }
 }
