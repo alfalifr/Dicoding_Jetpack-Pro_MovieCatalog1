@@ -29,9 +29,6 @@ import sidev.app.course.dicoding.moviecatalog1.util.TestingUtil
 @Config(sdk = [Build.VERSION_CODES.P])
 class DetailActivityUnitTest {
 
-    @get:Rule
-    val actRule = ActivityScenarioRule(MainActivity::class.java)
-
     val textMatcher = RobolectricTestingUtil.ViewMatchers::textMatchesAndDisplayed
 
     // The activity creation line can't be located in @Before because
