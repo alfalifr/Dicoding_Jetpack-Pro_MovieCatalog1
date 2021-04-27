@@ -18,8 +18,6 @@ import sidev.app.course.dicoding.moviecatalog1.ui.activity.MainActivity
 import sidev.lib.console.prine
 
 @RunWith(AndroidJUnit4::class)
-//@Config(sdk = [Build.VERSION_CODES.P], manifest = Config.NONE)
-//@Config(maxSdk = Build.VERSION_CODES.P)
 @Config(sdk = [Build.VERSION_CODES.P])
 class DummyActivityTest {
 
