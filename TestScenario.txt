@@ -1,0 +1,112 @@
+	• Skenario
+		○ Instrumented Test:
+			§ DetailActivityTest:
+				□ showDetail:
+					® On MainActivity, click first item appear in RecyclerView, then enter DetailActivity.
+					® Assert loading progress bar should be gone.
+					® Assert error TextView should be gone.
+					® Assert title is displayed and not template.
+					® Assert release date is displayed and not template.
+					® Assert genres is displayed and not template.
+					® Assert overview header is displayed.
+					® Assert overview content is displayed and not template.
+				□ showDetailOnError:
+					® On MainActivity, click first item appear in RecyclerView, then enter DetailActivity.
+					® Assert loading progress bar should be gone.
+					® Assert error TextView is displayed with text starts with 'Error:' and contains 'cause:'.
+					® Assert overview header should be gone.
+					® Assert overview content should be gone.
+			§ MainActivityTest:
+				□ getShowList:
+					® Assert RecyclerView is displayed and not empty.
+					® Assert first item title is displayed and not template.
+					® Assert first item release date is displayed and not template.
+					® Assert loading progress bar should be gone.
+					® Assert no data TextView should be gone.
+				□ getShowListOnError:
+					® Assert RecyclerView should be gone.
+					® Assert loading progress should be gone.
+					® Assert no data TextView is displayed with text starts with 'Error:' and contains 'cause:'.
+				□ getShowListOnNoData:
+					® Assert RecyclerView should be gone.
+					® Assert loading progress should be gone.
+					® Assert no data TextView is displayed with text same as R.string.no_data.
+		○ Unit Testing:
+			§ ShowApiRepoTesting:
+				□ getPopularMovieList:
+					® Assert the result is Success.
+					® Assert the data inside is not null.
+					® Assert the data list is not empty.
+					® Assert the id of random item inside is not blank.
+					® Assert the img of random item inside starts with "/".
+					® Assert the title of random item inside is not blank.
+					® Assert the release date of random item inside is not blank.
+				□ getPopularTvList:
+					® Assert the result is Success.
+					® Assert the data inside is not null.
+					® Assert the data list is not empty.
+					® Assert the id of random item inside is not blank.
+					® Assert the img of random item inside starts with "/".
+					® Assert the title of random item inside is not blank.
+					® Assert the release date of random item inside is not blank.
+				□ getMovieDetail: (Data as of 26 April 2021.)
+					® Assert the result is Success.
+					® Assert the id of detail is "458576".
+					® Assert the title of detail is "Monster Hunter".
+					® Assert the tagline of detail is "Behind our world, there is another.".
+					® Assert the release date of detail is "2020-12-03".
+					® Assert the overview of detail is not blank.
+				□ getTvDetail: (Data as of 26 April 2021.)
+					® Assert the result is Success.
+					® Assert the id of detail is "1429".
+					® Assert the title of detail is "Attack on Titan".
+					® Assert the overview of detail contains "humans were nearly exterminated by Titans".
+			§ ShowDetailViewModelTest:
+				□ downloadShowDetail:
+					® Assert data from LiveData is not null.
+					® Assert the title of the data is not blank.
+					® Assert the id of the data is not blank.
+					® Assert the release of the data is not blank.
+					® Assert the overview of the data is not blank.
+			§ ShowListViewModelTest:
+				□ downloadShowPopularList:
+					® Assert the list from LiveData is not null.
+					® Assert the list is not empty.
+					® Assert the id of random item inside is not blank.
+					® Assert the img of random item inside starts with "/".
+					® Assert the title of random item inside is not blank.
+					® Assert the release date of random item inside is not blank.
+		○ Unit Testing (Robolectric):
+			§ DetailActivityUnitTest:
+				□ showDetail:
+					® Test starts straight in DetailActivity.
+					® Assert loading progress bar should be gone.
+					® Assert error TextView should be gone.
+					® Assert title is displayed and not template.
+					® Assert release date is displayed and not template.
+					® Assert genres is displayed and not template.
+					® Assert overview header is displayed.
+					® Assert overview content is displayed and not template.
+				□ showDetailOnError:
+					® Test starts straight in DetailActivity.
+					® Assert loading progress bar should be gone.
+					® Assert error TextView is displayed with text starts with 'Error:' and contains 'cause:'.
+					® Assert overview header should be gone.
+					® Assert overview content should be gone.
+			§ MainActivityUnitTest:
+				□ getShowList:
+					® Assert RecyclerView is displayed.
+					® Assert RecyclerView's LayoutManger is not null.
+					® Assert first item is displayed
+					® Assert first item title is displayed and not template.
+					® Assert first item release date is displayed and not template.
+					® Assert loading progress bar should be gone.
+					® Assert no data TextView should be gone.
+				□ getShowListOnError:
+					® Assert RecyclerView should be gone but not null.
+					® Assert loading progress bar should be gone.
+					® Assert error TextView is displayed and shows error message.
+				□ getShowListOnNoData:
+					® Assert RecyclerView should be gone but not null.
+					® Assert loading progress bar should be gone.
+					® Assert error TextView is displayed and shows no data message.
