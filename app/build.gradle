@@ -50,7 +50,6 @@ android {
 }
 
 dependencies {
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -66,11 +65,8 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.0'
 
     implementation 'com.google.code.gson:gson:2.8.6'
-    //implementation 'com.googlecode.json-simple:json-simple:1.1'
 
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
-
-    //implementation "androidx.test:core:1.3.0"
 
 
     implementation 'com.android.support.test.espresso:espresso-idling-resource:3.0.2'
@@ -78,17 +74,14 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0' // For RecyclerView item
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation 'androidx.test:rules:1.3.0'
 
     testImplementation 'androidx.test.ext:junit:1.1.2'
     testImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    testImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
+    testImplementation 'androidx.test.espresso:espresso-contrib:3.3.0' // For RecyclerView item
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "org.robolectric:robolectric:4.5.1"
     testImplementation 'org.robolectric:shadows-httpclient:4.5'
-
-    //testImplementation 'com.android.volley:volley:1.2.0'
-    //implementation "org.mockito:mockito-inline:2.10.0"
 }
